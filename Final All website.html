@@ -6,8 +6,14 @@
     <title>All-in-One Toolkit</title>
     <!-- Favicon from your portfolio -->
     <link rel="icon" href="https://marufusion.rf.gd/wp-content/uploads/2024/10/cropped-Untitled-design-12-small-32x32.png" sizes="32x32">
-    <!-- Tailwind CSS for styling -->
+    
+    <!-- 
+      Tailwind CSS for styling. 
+      If the website appears unstyled after deploying, it means your browser could not fetch this file.
+      Please check your internet connection and the browser's developer console for any errors.
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- JavaScript Libraries for Tools -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
@@ -16,17 +22,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- Global Styles --- */
-        :root {
-            --theme-primary: #4f46e5;
-            --theme-primary-hover: #4338ca;
-            --theme-secondary-bg: #1a202c;
-            --theme-card-bg: #2d3748;
-            --theme-text-light: #e2e8f0;
-            --theme-text-dark: #1a202c;
-        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--theme-secondary-bg);
+            background-color: #1a202c; /* A dark theme for the body */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -44,7 +42,7 @@
         }
         /* Style for the active navigation link */
         .nav-link.active {
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
         }
 
@@ -53,7 +51,7 @@
             content: 'Select Folder';
             position: absolute;
             inset: 0;
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
             display: flex;
             justify-content: center;
@@ -63,7 +61,7 @@
             transition: background-color 0.3s;
         }
         #folder-upload-btn:hover::before {
-            background-color: var(--theme-primary-hover);
+            background-color: #4338ca;
         }
         .error-message {
             color: #f87171;
@@ -93,8 +91,8 @@
             white-space: pre-wrap;
             outline: none;
             font-size: 14px;
-            background-color: var(--theme-card-bg);
-            color: var(--theme-text-light);
+            background-color: #2d3748;
+            color: #e2e8f0;
             border-radius: 0.5rem;
         }
         .exception-box {
@@ -115,15 +113,15 @@
             height: 150px;
             padding: 10px;
             margin-top: 10px;
-            background-color: var(--theme-card-bg);
+            background-color: #2d3748;
             border: 1px solid #4a5568;
-            color: var(--theme-text-light);
+            color: #e2e8f0;
             border-radius: 0.5rem;
         }
         #duplicate-checker-page button {
             padding: 8px 16px;
             margin: 5px 5px 5px 0;
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
             border: none;
             border-radius: 0.5rem;
@@ -156,7 +154,7 @@
             transition: all 0.3s ease-in-out;
         }
         .filter-btn-active {
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
         }
     </style>
