@@ -6,8 +6,14 @@
     <title>All-in-One Toolkit</title>
     <!-- Favicon from your portfolio -->
     <link rel="icon" href="https://marufusion.rf.gd/wp-content/uploads/2024/10/cropped-Untitled-design-12-small-32x32.png" sizes="32x32">
-    <!-- Tailwind CSS for styling -->
+    
+    <!-- 
+      Tailwind CSS for styling. 
+      If the website appears unstyled after deploying, it means your browser could not fetch this file.
+      Please check your internet connection and the browser's developer console for any errors.
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- JavaScript Libraries for Tools -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
@@ -16,17 +22,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- Global Styles --- */
-        :root {
-            --theme-primary: #4f46e5;
-            --theme-primary-hover: #4338ca;
-            --theme-secondary-bg: #1a202c;
-            --theme-card-bg: #2d3748;
-            --theme-text-light: #e2e8f0;
-            --theme-text-dark: #1a202c;
-        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--theme-secondary-bg);
+            background-color: #1a202c; /* A dark theme for the body */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -44,16 +42,16 @@
         }
         /* Style for the active navigation link */
         .nav-link.active {
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
         }
 
         /* --- Styles from Background Remover --- */
-        #folder-upload-btn::before {
+        #folder-upload-btn::before, #converter-folder-upload-btn::before {
             content: 'Select Folder';
             position: absolute;
             inset: 0;
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
             display: flex;
             justify-content: center;
@@ -62,8 +60,8 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        #folder-upload-btn:hover::before {
-            background-color: var(--theme-primary-hover);
+        #folder-upload-btn:hover::before, #converter-folder-upload-btn:hover::before {
+            background-color: #4338ca;
         }
         .error-message {
             color: #f87171;
@@ -93,8 +91,8 @@
             white-space: pre-wrap;
             outline: none;
             font-size: 14px;
-            background-color: var(--theme-card-bg);
-            color: var(--theme-text-light);
+            background-color: #2d3748;
+            color: #e2e8f0;
             border-radius: 0.5rem;
         }
         .exception-box {
@@ -115,15 +113,15 @@
             height: 150px;
             padding: 10px;
             margin-top: 10px;
-            background-color: var(--theme-card-bg);
+            background-color: #2d3748;
             border: 1px solid #4a5568;
-            color: var(--theme-text-light);
+            color: #e2e8f0;
             border-radius: 0.5rem;
         }
         #duplicate-checker-page button {
             padding: 8px 16px;
             margin: 5px 5px 5px 0;
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
             border: none;
             border-radius: 0.5rem;
@@ -156,7 +154,7 @@
             transition: all 0.3s ease-in-out;
         }
         .filter-btn-active {
-            background-color: var(--theme-primary);
+            background-color: #4f46e5;
             color: white;
         }
     </style>
@@ -172,6 +170,7 @@
                 <a href="#renamer" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">File Renamer</a>
                 <a href="#duplicate-checker" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Duplicate Checker</a>
                 <a href="#metadata-tool" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Metadata Tool</a>
+                <a href="#converter" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Image Converter</a>
                 <a href="https://marufusion.rf.gd/" target="_blank" class="px-3 py-2 rounded-md text-sm font-medium text-blue-400 hover:bg-gray-700 hover:text-blue-300">Maruf's Portfolio</a>
             </div>
         </nav>
@@ -462,6 +461,45 @@
                 <p id="toast-message"></p>
             </div>
         </section>
+
+        <!-- Page 5: Image Converter -->
+        <section id="converter-page" class="page-content">
+            <div class="w-full max-w-2xl mx-auto bg-gray-800 rounded-xl shadow-2xl p-6 md:p-8">
+                <div class="text-center mb-6">
+                    <h1 class="text-3xl md:text-4xl font-bold text-white">Batch Image Converter</h1>
+                    <p class="text-gray-400 mt-2">Convert SVG, PNG, and WEBP files to JPG or PNG.</p>
+                </div>
+                <div class="mb-6">
+                    <label for="outputFormat" class="block text-sm font-medium text-gray-300 mb-2">Output Format:</label>
+                    <select id="outputFormat" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="image/jpeg">JPG</option>
+                        <option value="image/png">PNG</option>
+                    </select>
+                </div>
+                <div class="bg-gray-700 border-2 border-dashed border-gray-500 rounded-lg p-8 text-center mb-6">
+                    <div class="relative inline-block">
+                        <label id="converter-folder-upload-btn" class="relative w-48 h-12 block">
+                            <input type="file" id="converterFolderInput" webkitdirectory directory multiple class="opacity-0 absolute inset-0 w-full h-full cursor-pointer">
+                        </label>
+                    </div>
+                    <p id="converter-upload-prompt" class="mt-4 text-gray-400">Select a folder of images to convert.</p>
+                </div>
+                <div id="converter-controls" class="hidden">
+                    <h2 class="text-xl font-semibold text-white mb-3">Selected Files:</h2>
+                    <div id="converterFileList" class="bg-gray-700 rounded-lg p-4 max-h-60 overflow-y-auto mb-6"></div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button id="converter-process-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12A8 8 0 1013 5.26"></path></svg>
+                            Convert & Download ZIP
+                        </button>
+                        <button id="converter-reset-btn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-500 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">Reset</button>
+                    </div>
+                </div>
+                <div id="converter-status" class="hidden text-center mt-6">
+                     <p id="converterStatusText" class="text-lg text-blue-400"></p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-gray-800 text-gray-400 py-4 border-t border-gray-700">
@@ -736,10 +774,14 @@
             });
 
             processBtn.addEventListener('click', async function handleFileProcessing() {
-                const epsFiles = epsFilesInput.files;
+                const epsFilesList = epsFilesInput.files;
                 const csvFile = csvFileInput.files[0];
-                if (epsFiles.length === 0) { showError("Please upload at least one EPS file."); return; }
+                if (epsFilesList.length === 0) { showError("Please upload at least one EPS file."); return; }
                 if (!csvFile) { showError("Please upload a CSV file with new names."); return; }
+                
+                // *** FIX: Sort the uploaded files alphabetically ***
+                const epsFiles = Array.from(epsFilesList).sort((a, b) => a.name.localeCompare(b.name));
+
                 setLoadingState(true);
                 try {
                     const newNames = await parseCsvToArray(csvFile);
@@ -888,9 +930,6 @@
         (function() {
             const page = document.getElementById('metadata-tool-page');
             if (!page) return;
-            // The script from 'meta data seo and new seperate file csv.html' is complex and mostly self-contained.
-            // We just need to make sure its selectors are scoped to its page.
-            // I've prefixed the file input IDs to avoid conflicts.
             const settingsBtn = page.querySelector('#settings-btn');
             const closeSettingsBtn = page.querySelector('#close-settings-btn');
             const settingsModal = page.querySelector('#settings-modal');
@@ -1070,6 +1109,8 @@
             const processFileObjects = (fileList) => {
                 imageFiles.forEach(img => URL.revokeObjectURL(img.objectUrl));
                 const files = Array.from(fileList);
+                // *** FIX: Sort the uploaded files alphabetically ***
+                files.sort((a, b) => a.name.localeCompare(b.name));
                 const imageExtensions = ['.png', '.jpg', '.jpeg', '.webp', '.svg'];
                 const sanitizeForId = (str) => str.replace(/[^a-zA-Z0-9_-]/g, '-');
                 const imageFileObjects = files.filter(file => imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext)));
